@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+let elements=[];
+const sandbox={PriceReaderDOM:{clean:x=>String(x||'').replace(/\s+/g,' ').trim(),visible:element=>!element.hidden},document:{querySelector:()=>({querySelectorAll:()=>elements})}};
+vm.createContext(sandbox);vm.runInContext(fs.readFileSync(path.join(root,'readers/events.js'),'utf8'),sandbox);
+const node=(text,properties={})=>({innerText:text,tagName:'SPAN',closest:()=>null,...properties});
+const config={eventNames:['무진장 블랙프라이데이','무진장','타임특가','올영세일'],eventSelectors:['.badge']};
+elements=[node('타임특가')];assert.equal(sandbox.PriceEvents.read(config),'타임특가');
+elements=[node('올영세일',{hidden:true}),node('무진장',{closest:()=>({})})];assert.equal(sandbox.PriceEvents.read(config),'');
+elements=[node('상품명 무진장',{tagName:'H1'}),node('59,400원')];assert.equal(sandbox.PriceEvents.read(config),'');
+elements=[node('무진장 블랙프라이데이'),node('타임특가')];assert.equal(sandbox.PriceEvents.read(config),'무진장 블랙프라이데이 · 타임특가');
+elements=[];assert.equal(sandbox.PriceEvents.read(config),'');
+console.log('PASS visible event labels, hidden/recommendation exclusion, title exclusion, overlap deduplication and empty fallback');

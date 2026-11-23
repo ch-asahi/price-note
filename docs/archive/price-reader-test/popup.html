@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>가격 읽기 테스트</title><link rel="stylesheet" href="popup.css"><link rel="stylesheet" href="policy.css"></head>
+<body>
+  <h1>가격 읽기 테스트</h1>
+  <p>v0.3 · 숨은 데이터 먼저 검사 → 부족한 항목만 클릭 지정. 현재 상품 탭만 읽습니다.</p>
+  <button id="read">숨은 데이터 검사 / 다시 읽기</button>
+  <button id="reset" class="secondary">이 사이트 클릭 위치 초기화</button>
+  <p id="status" role="status">아직 읽지 않았습니다.</p>
+  <div id="fields"></div>
+  <details><summary>검사 위치·후보·제외 사유 전체 보기</summary><div id="results"></div></details>
+  <form id="review" hidden>
+    <h2>화면과 비교하기</h2>
+    <p>숨은 데이터가 최신 화면과 다를 수 있습니다. 같은 옵션의 일반 판매가와 비교해 주세요. 입력 내용은 이 PC에 임시 저장됩니다.</p>
+    <label>전체 결과 <select id="verdict"><option value="unverified">아직 확인 안 함</option><option value="pass">상품명·이미지·정가·판매가 모두 일치</option><option value="partial">일부만 일치 / 정가 미표시</option><option value="fail">읽기 실패 / 다른 상품 값</option></select></label>
+    <label>화면의 정가 (원) <input id="original" type="number" min="1" step="1" placeholder="표시 안 되면 비워두기"></label>
+    <label>화면의 판매가 (원) <input id="sale" type="number" min="1" step="1"></label>
+    <h2>가격 기준 확인</h2>
+    <p>판매가 = 쿠폰·회원등급·카드 할인을 제외한 공통 할인가. 옵션 가격이 다르면 첫 번째 옵션을 직접 선택한 뒤 다시 읽으세요.</p>
+    <label>읽은 판매가 종류 <select id="priceKind"><option value="unknown">미확인</option><option value="public">누구에게나 보이는 공통 할인가</option><option value="coupon">쿠폰 적용가 (기록 대상 아님)</option><option value="member">회원·등급 할인가 (기록 대상 아님)</option><option value="card">카드 할인가 (기록 대상 아님)</option></select></label>
+    <label>현재 로그인 상태 <select id="loginState"><option value="unknown">모름 / 미확인</option><option value="loggedOut">로그아웃 상태</option><option value="loggedIn">로그인 상태</option></select></label>
+    <label>옵션 가격 <select id="optionCase"><option value="unknown">미확인</option><option value="none">옵션 없음</option><option value="same">여러 옵션의 가격이 같음</option><option value="different">옵션 가격 다름</option></select></label>
+    <label>첫 번째 옵션 이름 <input id="firstOptionName" placeholder="예: 80ml 더블 기획 / 블랙 S (옵션 없으면 비우기)"></label>
+    <label class="check"><input id="firstOptionConfirmed" type="checkbox"> 첫 번째 옵션을 직접 선택하고 읽은 가격입니다</label>
+    <p id="policyStatus" role="status"></p>
+    <label>비교 메모 <textarea id="notes" placeholder="어떤 후보가 맞았는지, 옵션·쿠폰 조건, 실패한 항목"></textarea></label>
+    <button type="submit">테스트 결과 JSON 저장</button>
+    <p>보고서와 사이트별 클릭 위치는 chrome.storage.local에 저장됩니다. 이미지는 주소만 표시하며 추가로 로드하지 않습니다.</p>
+  </form>
+  <script src="readers/musinsa.js"></script>
+  <script src="readers/oliveyoung.js"></script>
+  <script src="readers/hidden.js"></script>
+  <script src="readers/dom.js"></script>
+  <script src="readers/policy.js"></script>
+  <script src="popup.js"></script>
+</body></html>

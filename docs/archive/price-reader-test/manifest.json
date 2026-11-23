@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "가격 읽기 사전 테스트",
+  "version": "0.3.0",
+  "description": "직접 연 상품 페이지의 숨은 데이터를 검사하고, 부족한 항목은 클릭 위치를 저장해 읽습니다.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": { "default_popup": "popup.html", "default_title": "가격 읽기 테스트" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; img-src 'none'" }
+}

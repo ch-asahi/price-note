@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "가격노트 · 무신사와 올리브영",
+  "version": "1.1.0",
+  "minimum_chrome_version": "120",
+  "description": "직접 연 상품의 공통 판매가와 정가를 이 PC에 기록합니다. 서버 통신 없이 가격 추이와 세일 여부를 확인하세요.",
+  "permissions": ["storage", "scripting", "alarms", "notifications"],
+  "host_permissions": ["https://www.musinsa.com/*", "https://musinsa.com/*", "https://www.oliveyoung.co.kr/*", "https://m.oliveyoung.co.kr/*"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_popup": "app.html", "default_title": "가격노트", "default_icon": "icons/icon128.png"},
+  "icons": {"128": "icons/icon128.png"},
+  "content_scripts": [{
+    "matches": ["https://www.musinsa.com/*", "https://musinsa.com/*", "https://www.oliveyoung.co.kr/*", "https://m.oliveyoung.co.kr/*"],
+    "js": ["lib/core.js", "readers/dom.js", "readers/musinsa.js", "readers/oliveyoung.js", "readers/events.js", "content.js"],
+    "run_at": "document_idle"
+  }],
+  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'"}
+}

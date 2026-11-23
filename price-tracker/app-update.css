@@ -1,0 +1,7 @@
+.metrics{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}
+.record-status{font-size:12px;color:#667d78;white-space:nowrap}
+.record-status.missing{color:#8a6729}
+.info-list{display:grid;grid-template-columns:105px minmax(0,1fr);gap:8px 12px;line-height:1.7;font-size:14px}
+.info-list dt{color:#6a7f85}.info-list dd{margin:0;overflow-wrap:anywhere}
+#recordTable{overflow-x:auto}
+@media(min-width:1000px){.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.metric strong{font-size:22px}}

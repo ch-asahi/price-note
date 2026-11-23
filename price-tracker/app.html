@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>가격노트</title><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="app-update.css"></head>
+<body>
+  <div class="app">
+    <header class="top"><div class="brand"><img src="icons/icon128.png" alt="" width="36" height="36"><div><h1>가격노트</h1><p>할인율보다, 가격의 기록</p></div></div><div class="header-actions"><button id="full" class="quiet">넓게 보기</button><button id="settingsToggle" class="quiet" aria-expanded="false">설정</button></div></header>
+    <div id="demoBanner" class="notice" hidden>화면 확인용 예시 데이터입니다. 실제 상품 기록이 아닙니다.</div>
+    <div id="message" role="status" class="message"></div>
+    <div id="backupNotice" class="notice" role="status" hidden>백업 권장 · CSV 내보내기로 기록을 안전하게 보관하세요.</div>
+    <section id="settings" class="settings" hidden><form id="settingsForm"><h2>저녁 기록 알림</h2><label class="check"><input id="reminderEnabled" type="checkbox"> 매일 저녁 미기록 상품 알림 받기</label><label>알림 시각 (한국 시간)<select id="reminderHour"><option value="17">오후 5시</option><option value="18">오후 6시</option><option value="19">오후 7시</option><option value="20">오후 8시</option><option value="21">오후 9시</option><option value="22">오후 10시</option><option value="23">오후 11시</option></select></label><div class="row"><button type="submit">설정 저장</button><button type="button" class="quiet" id="testNotification">알림 테스트</button></div><p class="muted">크롬·PC가 꺼져 있으면 정각에 알리지 못합니다. 저녁에 다시 실행하면 미기록 상품을 확인합니다.</p></form></section>
+    <div id="homeView">
+    <section class="overview"><div><span class="eyebrow" id="todayLabel"></span><h2>오늘도 가격을 남겨요</h2><p id="progressText" class="muted">등록된 상품을 열면 오늘의 가격을 기록합니다.</p></div><div class="completion"><strong id="progressCount">0<span> / 0</span></strong><span>오늘 기록한 상품</span></div></section>
+    <div class="toolbar"><div class="filter-group" aria-label="상품 필터"><button class="filter active" id="filterAll">전체 <span id="allCount">0</span></button><button class="filter" id="filterMissing">오늘 미기록 <span id="missingCount">0</span></button></div><button id="openMissing">미기록 전부 열기</button></div>
+    <div class="workspace"><aside class="sidebar"><label class="search-label"><span class="sr-only">상품 검색</span><input id="search" type="search" placeholder="상품 이름 검색"></label><div id="productList" class="product-list"></div><p id="limitLabel" class="muted small">최대 50개 · 이 PC에만 저장</p></aside><main id="detail" tabindex="-1"></main></div>
+    <footer class="footer"><span>직접 연 페이지에서만 기록합니다.</span><div class="row"><button id="export" class="quiet">CSV 내보내기</button><label class="file-button">CSV 가져오기<input id="import" type="file" accept=".csv,text/csv" hidden></label></div></footer>
+    </div>
+  </div>
+  <dialog id="importDialog"><h2>백업 파일 가져오기</h2><p id="importSummary"></p><p class="muted">기존 상품과 합칩니다. 같은 상품·날짜는 기록 시간이 더 늦은 값을 사용합니다.</p><div class="row"><button id="confirmImport">가져오기</button><button id="cancelImport" class="quiet">취소</button></div></dialog>
+  <script src="lib/core.js"></script><script src="lib/csv.js"></script><script src="lib/chart.js"></script><script src="app.js"></script>
+</body></html>
