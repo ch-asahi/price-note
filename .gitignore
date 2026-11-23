@@ -1,0 +1,24 @@
+# 개인 가격 기록과 CSV 백업
+*.csv
+*.csv.*
+backups/
+private/
+
+# 사전 테스트에서 내려받은 개인 JSON (manifest.json은 포함)
+price-read-test-*.json
+personal-test*.json
+*.local.json
+test-results/
+
+# 차단 페이지 원본에는 일회성 요청 정보가 들어갈 수 있음
+/docs/research/raw/
+
+# 과거 배포 압축 파일, 개발 환경 파일
+*.zip
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
